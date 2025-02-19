@@ -15,9 +15,14 @@ def main(config_file, restart):
     crawler.start()
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  
+    import multiprocessing  
+    multiprocessing.set_start_method("spawn")  # Ensures proper multiprocessing behavior on Windows
+    
     parser = ArgumentParser()
     parser.add_argument("--restart", action="store_true", default=False)
     parser.add_argument("--config_file", type=str, default="config.ini")
     args = parser.parse_args()
+    
     main(args.config_file, args.restart)
+
